@@ -65,12 +65,12 @@ a:hover {
 
 .sidebar ul, 
 .sidebar ol {
-  padding-left: 10px;
+  padding-left: 18px;
   margin: 0;
 }
 
 .sidebar li {
-  margin: 5px 0;
+  margin: 6px 0;
 }
 
 /* MAIN CONTENT */
@@ -131,6 +131,7 @@ a:hover {
   padding: 12px;
   background: #E2E8F0;
 }
+
 #footer p {
   margin: 0;
 }
