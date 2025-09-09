@@ -1,88 +1,97 @@
-/* RESET & GLOBAL */
-body {
+
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #fafafa;
+  background-color: #FFEDD5;
   color: #333;
   line-height: 1.6;
+  padding: 15px;
 }
 
 a {
-  color: #2563EB;
+  color: #B91C1C;
   text-decoration: none;
   transition: 0.3s;
 }
 
 a:hover {
-  color: #FBBF24; /* kuning emas saat hover */
+  color: #FACC15;
   text-decoration: underline;
 }
 
 /* HEADER */
 #header {
-  background: linear-gradient(90deg, #1E3A8A, #1E40AF);
+  background: linear-gradient(90deg, #DC2626, #B91C1C);
   color: white;
   text-align: center;
-  padding: 25px 10px;
+  padding: 30px 15px;
 }
 
 #header h1 {
-  margin: 0;
-  font-size: 28px;
+  font-size: clamp(20px, 4vw, 32px);
   letter-spacing: 2px;
 }
 
 /* NAVIGASI */
 #navbar {
-  background: #1E40AF;
+  background: #B91C1C;
   padding: 12px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 #navbar a {
   color: #fff;
-  margin: 0 15px;
   font-weight: 600;
+  font-size: 16px;
 }
 
 #navbar a:hover {
-  color: #FBBF24;
+  color: #FACC15;
 }
 
 /* SIDEBAR */
 .sidebar {
-  background: #E0F2FE;
-  padding: 10px;
+  background: #FDBA74;
   border-radius: 8px;
-  border: 1px solid #93C5FD;
+  border: 1px solid #EA580C;
+  padding: 15px;
 }
 
 .sidebar legend {
   font-weight: bold;
-  color: #1E3A8A;
-  font-size: 14px;
-}
-
-.sidebar ul, 
-.sidebar ol {
-  padding-left: 18px;
-  margin: 0;
+  color: #B91C1C;
+  font-size: 16px;
 }
 
 .sidebar li {
-  margin: 6px 0;
+  margin: 8px 0;
 }
 
 /* MAIN CONTENT */
+#main {
+  background: #FEF3C7;
+  padding: 20px;
+  border-radius: 8px;
+}
+
 #main h2 {
-  color: #2563EB;
-  border-bottom: 2px solid #93C5FD;
+  color: #DC2626;
+  border-bottom: 2px solid #F59E0B;
   padding-bottom: 6px;
   margin-bottom: 12px;
 }
 
 #main p {
   margin-bottom: 15px;
+  font-size: clamp(14px, 2vw, 16px);
 }
 
 /* TABLE */
@@ -92,30 +101,37 @@ a:hover {
   margin-top: 12px;
 }
 
-.table-riwayat th, 
-.table-riwayat td {
-  border: 1px solid #ddd;
+.table-riwayat th, .table-riwayat td {
+  border: 1px solid #B91C1C;
   padding: 10px;
   text-align: center;
 }
 
 .table-riwayat th {
-  background: #DBEAFE; /* biru muda */
-  color: #1E3A8A;
+  background: #F59E0B;
+  color: white;
 }
 
 /* GALLERY */
-#gallery h2 {
-  color: #1E3A8A;
+#gallery {
   text-align: center;
+  background: #FEF3C7;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+#gallery h2 {
+  color: #B91C1C;
   margin-bottom: 15px;
 }
 
 #gallery img {
-  margin: 0 12px;
+  margin: 0 10px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.25);
   transition: transform 0.3s, box-shadow 0.3s;
+  width: clamp(150px, 30%, 280px);
+  height: auto;
 }
 
 #gallery img:hover {
@@ -127,11 +143,7 @@ a:hover {
 #footer {
   text-align: center;
   font-size: 14px;
-  color: #1E3A8A;
+  color: #FACC15;
   padding: 12px;
-  background: #E2E8F0;
-}
-
-#footer p {
-  margin: 0;
+  background: #7F1D1D;
 }
