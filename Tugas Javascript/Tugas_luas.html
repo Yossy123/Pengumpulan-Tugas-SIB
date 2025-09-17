@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menghitung Luas Bangun Datar</title>
+</head>
+
+<body>
+
+    <h1>Menghitung Luas Bangun Datar</h1>
+
+    <div id="luas-persegi-panjang"></div>
+    <div id="luas-bujur-sangkar"></div>
+    <div id="luas-segitiga"></div>
+
+    <script>
+        // --- Perhitungan Luas Persegi Panjang ---
+        let panjang = 15;
+        let lebar = 8;
+
+        // Menghitung luas dengan rumus panjang * lebar
+        let luasPersegiPanjang = panjang * lebar;
+
+        // Menampilkan hasil ke elemen HTML
+        const hasilPersegiPanjang = document.getElementById("luas-persegi-panjang");
+        hasilPersegiPanjang.innerHTML = `Luas Persegi Panjang:
+        <ul>
+            <li>Panjang: ${panjang}</li>
+            <li>Lebar: ${lebar}</li>
+            <li>Hasil Luas: ${luasPersegiPanjang}</li>
+        </ul>`;
+
+
+        // --- Perhitungan Luas Bujur Sangkar (Persegi) ---
+        let sisi = 10;
+
+        // Menghitung luas dengan rumus sisi * sisi
+        let luasBujurSangkar = sisi * sisi;
+
+        // Menampilkan hasil ke elemen HTML
+        const hasilBujurSangkar = document.getElementById("luas-bujur-sangkar");
+        hasilBujurSangkar.innerHTML = `Luas Bujur Sangkar:
+        <ul>
+            <li>Sisi: ${sisi}</li>
+            <li>Hasil Luas: ${luasBujurSangkar}</li>
+        </ul>`;
+
+
+        // --- Perhitungan Luas Segitiga ---
+        let alas = 12;
+        let tinggi = 5;
+
+        // Menghitung luas dengan rumus 0.5 * alas * tinggi
+        let luasSegitiga = 0.5 * alas * tinggi;
+
+        // Menampilkan hasil ke elemen HTML
+        const hasilSegitiga = document.getElementById("luas-segitiga");
+        hasilSegitiga.innerHTML = `Luas Segitiga:
+        <ul>
+            <li>Alas: ${alas}</li>
+            <li>Tinggi: ${tinggi}</li>
+            <li>Hasil Luas: ${luasSegitiga}</li>
+        </ul>`;
+
+    </script>
+</body>
+
+</html>
