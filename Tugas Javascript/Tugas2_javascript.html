@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 2 - Data Pegawai</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        thead {
+            background-color: #1fc8d4;
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tfoot {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+
+        tfoot td {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Data Gaji Pegawai</h1>
+
+    <script>
+        // --------- 1. DATA INPUT ---------
+        const namaPegawai = 'dodi prayodi';
+        const umur = 25;
+        const jabatan = 'manajer';
+        const status = 'menikah';
+
+        // --------- 2. VARIABEL UNTUK PERHITUNGAN ---------
+        let gajiPokok = 0;
+
+        // --------- 3. LOGIKA PERHITUNGAN ---------=
+        switch (jabatan.toLowerCase()) {
+            case 'manajer':
+                gajiPokok = 15000000;
+                break;
+            case 'asisten manajer':
+                gajiPokok = 10000000;
+                break;
+            case 'staff':
+                gajiPokok = 5000000;
+                break;
+            default:
+                gajiPokok = 0;
+        }
+
+        // Menghitung Tunjangan Jabatan (15% dari Gaji Pokok)
+        const tunjanganJabatan = 0.15 * gajiPokok;
+
+        // Menghitung BPJS (10% dari Gaji Pokok)
+        const bpjs = 0.10 * gajiPokok;
+
+        // Menghitung Tunjangan Keluarga (20% dari Gaji Pokok jika sudah menikah)
+        const tunjanganKeluarga = (status.toLowerCase() === 'menikah') ? (0.20 * gajiPokok) : 0;
+
+        // Menghitung Total Gaji
+        const totalGaji = gajiPokok + tunjanganJabatan + bpjs + tunjanganKeluarga;
+        function formatRupiah(angka) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(angka);
+        }
+
+        // --------- 4. CETAK OUTPUT KE DALAM TABEL HTML ---------
+        document.write(`
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama Pegawai</th>
+                        <th>Umur</th>
+                        <th>Jabatan</th>
+                        <th>Status</th>
+                        <th>Gaji Pokok</th>
+                        <th>Tunjangan Jabatan</th>
+                        <th>BPJS</th>
+                        <th>Tunjangan Keluarga</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${namaPegawai}</td>
+                        <td>${umur}</td>
+                        <td>${jabatan}</td>
+                        <td>${status}</td>
+                        <td>${formatRupiah(gajiPokok)}</td>
+                        <td>${formatRupiah(tunjanganJabatan)}</td>
+                        <td>${formatRupiah(bpjs)}</td>
+                        <td>${formatRupiah(tunjanganKeluarga)}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">Total Gaji</td>
+                        <td>${formatRupiah(totalGaji)}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        `);
+    </script>
+
+</body>
+
+</html>
