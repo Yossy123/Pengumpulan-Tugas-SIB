@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistem Manajemen Produk Toko</title>
+  <style>
+    body {
+      font-family: Verdana, sans-serif;
+      background: #f2f6fa;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #2d89ef;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top: 0;
+      color: #2d3e50;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background: #f9fafc;
+    }
+    .form-box {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f9f9ff;
+    }
+    .form-box input {
+      padding: 8px;
+      margin: 5px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+    }
+    .form-box button {
+      background: #00FF00;
+      color: #fff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .form-box button:hover {
+      background: #1e5fbf;
+    }
+    footer {
+      margin-top: 30px;
+      padding: 10px;
+      text-align: center;
+      font-size: 13px;
+      background: #f1f1f1;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Toko Online - Manajemen Produk</h1>
+  </header>
+  
+  <main>
+    <h2>Daftar Produk</h2>
+    <div id="daftarProduk"></div>
+
+    <div class="form-box">
+      <h3>Tambah Produk Baru</h3>
+      <input type="text" id="inputNama" placeholder="Nama produk">
+      <input type="number" id="inputHarga" placeholder="Harga">
+      <input type="number" id="inputStok" placeholder="Stok">
+      <button onclick="tambahDataProduk()">Tambah</button>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Sistem Manajemen Produk Toko | Yossy Indra Kusuma
+  </footer>
+
+  <script>
+    let dataProduk = [
+      { id: 1, nama: "Laptop", harga: 7000000, stok: 5 },
+      { id: 2, nama: "Mouse", harga: 200000, stok: 10 },
+      { id: 3, nama: "Keyboard", harga: 350000, stok: 7 }
+    ];
+
+    function renderProduk() {
+      let container = document.getElementById("daftarProduk");
+      if (dataProduk.length === 0) {
+        container.innerHTML = "<p><em>Belum ada produk.</em></p>";
+        return;
+      }
+
+      let html = `
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Nama Produk</th>
+            <th>Harga</th>
+            <th>Stok</th>
+            <th>Aksi</th>
+          </tr>
+      `;
+
+      dataProduk.forEach(item => {
+        html += `
+          <tr>
+            <td>${item.id}</td>
+            <td>${item.nama}</td>
+            <td>Rp ${item.harga.toLocaleString("id-ID")}</td>
+            <td>${item.stok}</td>
+            <td>
+              <button style="background:#e74c3c" onclick="hapusProduk(${item.id})">Hapus</button>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += "</table>";
+      container.innerHTML = html;
+    }
+
+    function tambahDataProduk() {
+      let nama = document.getElementById("inputNama").value.trim();
+      let harga = parseInt(document.getElementById("inputHarga").value);
+      let stok = parseInt(document.getElementById("inputStok").value);
+
+      if (!nama || isNaN(harga) || isNaN(stok)) {
+        alert("Isi semua input dengan benar!");
+        return;
+      }
+
+      let idBaru = dataProduk.length > 0 ? dataProduk[dataProduk.length - 1].id + 1 : 1;
+      dataProduk.push({ id: idBaru, nama: nama, harga: harga, stok: stok });
+
+      document.getElementById("inputNama").value = "";
+      document.getElementById("inputHarga").value = "";
+      document.getElementById("inputStok").value = "";
+
+      renderProduk();
+    }
+
+    function hapusProduk(id) {
+      let index = dataProduk.findIndex(p => p.id === id);
+      if (index !== -1) {
+        if (confirm("Yakin ingin menghapus produk: " + dataProduk[index].nama + "?")) {
+          dataProduk.splice(index, 1);
+          renderProduk();
+        }
+      }
+    }
+
+    renderProduk();
+  </script>
+</body>
+</html>
