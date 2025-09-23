@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistem Manajemen Transportasi</title>
+    <style>
+        /* CSS untuk mempercantik tampilan */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #0056b3;
+            border-bottom: 2px solid #eef;
+            padding-bottom: 10px;
+        }
+        .pelanggan {
+            border: 1px solid #ddd;
+            border-left: 5px solid #007bff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #f9fcff;
+        }
+        .pelanggan p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Sistem Manajemen Transportasi 🚗</h1>
+        <div id="daftar-pelanggan">
+            </div>
+    </div>
+
+    <script>
+        // --- 1. DEFINISI CLASS (BLUEPRINT OBJEK) ---
+
+        // Class untuk merepresentasikan Kendaraan
+        class Kendaraan {
+            constructor(jenis, platNomor) {
+                this.jenis = jenis;
+                this.platNomor = platNomor;
+            }
+        }
+
+        // Class untuk merepresentasikan Pelanggan
+        class Pelanggan {
+            constructor(nama, nomorTelepon) {
+                this.nama = nama;
+                this.nomorTelepon = nomorTelepon;
+                this.kendaraanDisewa = null; // Awalnya belum menyewa apa-apa
+            }
+
+            // Metode untuk mencatat transaksi sewa
+            sewaKendaraan(kendaraan) {
+                this.kendaraanDisewa = kendaraan;
+            }
+        }
+
+        // --- 2. DATABASE DAN FUNGSI UTAMA ---
+
+        // Array untuk menyimpan daftar pelanggan yang sedang menyewa
+        const daftarPelangganSewa = [];
+
+        // Fungsi untuk membuat objek pelanggan baru dan mencatat transaksinya
+        function catatPenyewaan(nama, nomorTelepon, kendaraan) {
+            const pelangganBaru = new Pelanggan(nama, nomorTelepon);
+            pelangganBaru.sewaKendaraan(kendaraan);
+            daftarPelangganSewa.push(pelangganBaru);
+        }
+
+        // Fungsi untuk menampilkan data ke dalam HTML
+        function tampilkanPelangganDiBrowser() {
+            const containerElement = document.getElementById('daftar-pelanggan');
+            let htmlContent = '<h2>Daftar Pelanggan Aktif</h2>';
+
+            if (daftarPelangganSewa.length === 0) {
+                htmlContent += '<p>Belum ada pelanggan yang menyewa kendaraan saat ini.</p>';
+            } else {
+                daftarPelangganSewa.forEach(pelanggan => {
+                    htmlContent += `
+                        <div class="pelanggan">
+                            <p><strong>Nama:</strong> ${pelanggan.nama}</p>
+                            <p><strong>Telepon:</strong> ${pelanggan.nomorTelepon}</p>
+                            <p><strong>Sewa:</strong> ${pelanggan.kendaraanDisewa.jenis} (Plat: ${pelanggan.kendaraanDisewa.platNomor})</p>
+                        </div>
+                    `;
+                });
+            }
+
+            containerElement.innerHTML = htmlContent;
+        }
+
+        // --- 3. CONTOH PENGGUNAAN SISTEM ---
+
+        // Membuat beberapa objek kendaraan
+        const mobil1 = new Kendaraan("Mobil MPV", "B 1234 ABC");
+        const motor1 = new Kendaraan("Motor Matic", "F 5678 XYZ");
+        const mobil2 = new Kendaraan("Mobil SUV", "D 9101 DEF");
+
+        // Mencatat beberapa transaksi penyewaan
+        catatPenyewaan("Andi Saputra", "081122334455", mobil1);
+        catatPenyewaan("Citra Lestari", "085566778899", motor1);
+        catatPenyewaan("Rian Hidayat", "089988776655", mobil2);
+
+        // Memanggil fungsi untuk menampilkan semua data ke halaman web
+        tampilkanPelangganDiBrowser();
+
+    </script>
+
+</body>
+</html>

@@ -161,7 +161,7 @@
     }
 
     function hapusProduk(id) {
-      let index = dataProduk.findIndex(p => p.id === id);
+      let index = dataProduk.findIndex(pp => p.id === id);
       if (index !== -1) {
         if (confirm("Yakin ingin menghapus produk: " + dataProduk[index].nama + "?")) {
           dataProduk.splice(index, 1);
