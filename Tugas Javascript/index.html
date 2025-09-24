@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Produk Toko</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 768px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-grup {
+            margin-bottom: 15px;
+        }
+
+        .form-grup label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-grup input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #555;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #444;
+        }
+
+        .area-hapus {
+            display: flex;
+            gap: 10px;
+        }
+
+        #produk-tabel {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #produk-tabel th,
+        #produk-tabel td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #produk-tabel th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Manajemen Produk Toko Online</h1>
+
+        <div class="form-grup">
+            <h2>Tambah Produk Baru</h2>
+            <input type="number" id="idProduk" placeholder="ID Produk (angka unik)">
+        </div>
+        <div class="form-grup">
+            <input type="text" id="namaProduk" placeholder="Nama Produk">
+        </div>
+        <div class="form-grup">
+            <input type="number" id="hargaProduk" placeholder="Harga Produk">
+        </div>
+        <button id="tombolTambah">Simpan Produk</button>
+
+        <hr style="margin: 20px 0;">
+
+        <div class="form-grup area-hapus">
+            <input type="number" id="idHapus" placeholder="Ketik ID produk untuk dihapus" style="flex-grow: 1;">
+            <button id="tombolHapus" style="width: auto;">Hapus Produk</button>
+        </div>
+
+        <div>
+            <h2>Daftar Produk</h2>
+            <table id="produk-tabel">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama Produk</th>
+                        <th>Harga</th>
+                    </tr>
+                </thead>
+                <tbody id="badan-tabel-produk">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // **Data Produk Awal**
+        let produkList = [
+            { id: 1, nama: "Laptop", harga: 12000000 },
+            { id: 2, nama: "Smartphone", harga: 5000000 },
+            { id: 3, nama: "Keyboard", harga: 750000 },
+            { id: 4, nama: "Mouse", harga: 400000 },
+            { id: 5, nama: "Monitor", harga: 2500000 },
+        ];
+
+        /**
+         * **Menampilkan Produk dengan Destructuring**
+         */
+        function tampilkanProduk() {
+            const badanTabel = document.getElementById('badan-tabel-produk');
+            badanTabel.innerHTML = '';
+
+            produkList.forEach(produk => {
+                // Penggunaan Destructuring untuk mengekstrak id, nama, dan harga dari objek produk
+                const { id, nama, harga } = produk;
+
+                const baris = document.createElement('tr');
+                baris.innerHTML = `
+            <td>${id}</td>
+            <td>${nama}</td>
+            <td>Rp ${harga.toLocaleString('id-ID')}</td>
+        `;
+                badanTabel.appendChild(baris);
+            });
+        }
+
+        /**
+         * **Menambahkan Produk dengan Spread Operator**
+         */
+        function tambahProduk(id, nama, harga) {
+            if (!id || !nama || !harga) {
+                alert("Harap lengkapi semua data produk!");
+                return;
+            }
+            const produkBaru = { id, nama, harga };
+            produkList = [...produkList, produkBaru];
+        }
+
+        /**
+         * **Menghapus Produk dengan Rest Parameter**
+         */
+        function hapusProduk(...idsUntukDihapus) {
+            if (idsUntukDihapus.length === 0 || !idsUntukDihapus[0]) {
+                alert("Masukkan ID produk yang valid untuk dihapus.");
+                return;
+            }
+
+            const targetIds = idsUntukDihapus.map(id => parseInt(id));
+            produkList = produkList.filter(produk => !targetIds.includes(produk.id));
+        }
+
+        // **Event Listener**
+        // Menambahkan event listener untuk tombol-tombol agar interaktif.
+        document.addEventListener('DOMContentLoaded', () => {
+            const tombolTambah = document.getElementById('tombolTambah');
+            const tombolHapus = document.getElementById('tombolHapus');
+
+            // Event listener untuk tombol 'Simpan Produk'
+            tombolTambah.addEventListener('click', () => {
+                const id = parseInt(document.getElementById('idProduk').value);
+                const nama = document.getElementById('namaProduk').value;
+                const harga = parseInt(document.getElementById('hargaProduk').value);
+
+                tambahProduk(id, nama, harga);
+                tampilkanProduk(); // Perbarui tampilan tabel
+
+                // Bersihkan form setelah data ditambahkan
+                document.getElementById('idProduk').value = '';
+                document.getElementById('namaProduk').value = '';
+                document.getElementById('hargaProduk').value = '';
+            });
+
+            // Event listener untuk tombol 'Hapus Produk'
+            tombolHapus.addEventListener('click', () => {
+                const id = document.getElementById('idHapus').value;
+                hapusProduk(id);
+                tampilkanProduk(); // Perbarui tampilan tabel
+                document.getElementById('idHapus').value = ''; // Bersihkan input hapus
+            });
+
+            // Tampilkan data produk saat halaman pertama kali dimuat
+            tampilkanProduk();
+        });
+    </script>
+
+</body>
+
+</html>

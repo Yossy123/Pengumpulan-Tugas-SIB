@@ -1,4 +1,4 @@
-const formatWaktu = (date) => date.toLocaleTimeString("id-ID", {
+ const formatWaktu = (date) => date.toLocaleTimeString("id-ID", {
     hour: '2-digit',
     minute: '2-digit'
 });
