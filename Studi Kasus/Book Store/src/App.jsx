@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-
-// Komponen untuk Halaman Beranda (Home)
-// Saya mempertahankan struktur komponen ini agar kode tetap rapi,
-// sambil mengintegrasikan konten yang sudah Anda tambahkan.
 const HomePage = () => (
   <>
     {/* hero section */}
