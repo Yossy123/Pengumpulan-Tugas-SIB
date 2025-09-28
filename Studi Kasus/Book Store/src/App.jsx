@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { BrowserRouter, Route, Routes } from 'react-router';
 import Home from '../Pages';
 import Books from '../Pages/books';
 import Team from '../Pages/Team';
 import Contact from '../Pages/Contact';
 
+=======
+>>>>>>> 729d35b8733ef07ec0f8575156d4e31a3a6f62a4
 const HomePage = () => (
   <>
   </>
