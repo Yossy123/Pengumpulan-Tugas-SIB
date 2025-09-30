@@ -10,7 +10,7 @@ export default function Header() {
                     <li><Link to="/" className="nav-link px-2">Home</Link></li>
                     <li><Link to="/books" className="nav-link px-2">Book</Link></li>
                     <li><Link to="/team" className="nav-link px-2">Team</Link></li>
-                    <li><Link to="/contact" className="nav-link px-2">Contact</Link></li>
+                    <li><Link to="/Contact" className="nav-link px-2">Contact</Link></li>
                 </ul>
                 <div className="col-md-3 text-end"> <Link to="/login" className="btn btn-outline-primary me-2">Login</Link> <Link to="/register" className="btn btn-primary">Register</Link> </div>
             </header>
