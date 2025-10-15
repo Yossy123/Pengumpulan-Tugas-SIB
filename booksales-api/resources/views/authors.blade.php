@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h2>Genre List</h2>
-            <ul>
-            @foreach($genres as $genre)
-                <li>{{ $genre['id'] }} - {{ $genre['name'] }}</li>
+    <h2>Author List</h2>
+        <ul>
+            @foreach($authors as $author)
+                <li>{{ $author['id'] }} - {{ $author['name'] }}</li>
             @endforeach
-            </ul>
-
+        </ul>
 </body>
 </html>
