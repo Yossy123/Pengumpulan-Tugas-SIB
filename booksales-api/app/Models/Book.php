@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    protected $fillable = ['title', 'author_id', 'genre', 'year'];
-
+    protected $table = 'books';
     // Tambahkan relasi ke Author
     public function author()
     {

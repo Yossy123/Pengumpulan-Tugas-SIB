@@ -13,10 +13,50 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
-        Book::create(['title'=>'Harry Potter', 'author_id'=>1, 'genre'=>'Fantasy', 'year'=>1997]);
-        Book::create(['title'=>'Norwegian Wood', 'author_id'=>2, 'genre'=>'Drama', 'year'=>1987]);
-        Book::create(['title'=>'Hafalan Shalat Delisa', 'author_id'=>3, 'genre'=>'Drama', 'year'=>2005]);
-        Book::create(['title'=>'A Game of Thrones', 'author_id'=>4, 'genre'=>'Fantasy', 'year'=>1996]);
-        Book::create(['title'=>'Percy Jackson', 'author_id'=>5, 'genre'=>'Fantasy', 'year'=>2005]);
+        Book::create([
+            'title'=>'Harry Potter and the Philosopher\'s Stone', 
+            'description'=>'First book in the Harry Potter series',
+            'price'=>19.99,
+            'stock'=>10,
+            'cover_photo'=>'harry_potter_1.jpg',
+            'genre_id'=>1,
+            'author_id'=>1
+        ]);
+        Book::create([
+            'title'=>'Norwegian Wood', 
+            'description'=>'A nostalgic story of loss and sexuality',
+            'price'=>15.99,
+            'stock'=>5,
+            'cover_photo'=>'norwegian_wood.jpg',
+            'genre_id'=>2,
+            'author_id'=>2
+        ]);
+        Book::create([
+            'title'=>'Hafalan Shalat Delisa', 
+            'description'=>'A touching story set against the backdrop of the 2004 tsunami',
+            'price'=>12.99,
+            'stock'=>8,
+            'cover_photo'=>'hafalan_shalat_delisa.jpg',
+            'genre_id'=>3,
+            'author_id'=>3
+        ]);
+        Book::create([
+            'title'=>'A Game of Thrones', 
+            'description'=>'The first book in A Song of Ice and Fire series',
+            'price'=>22.99,
+            'stock'=>7,
+            'cover_photo'=>'game_of_thrones.jpg',
+            'genre_id'=>4,
+            'author_id'=>4
+        ]);
+        Book::create([
+            'title'=>'The Lightning Thief', 
+            'description'=>'The first book in the Percy Jackson & the Olympians series',
+            'price'=>14.99,
+            'stock'=>12,
+            'cover_photo'=>'lightning_thief.jpg',
+            'genre_id'=>5,
+            'author_id'=>5
+        ]);
     }
 }

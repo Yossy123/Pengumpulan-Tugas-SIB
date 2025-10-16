@@ -8,6 +8,20 @@ use App\Models\Author;
 class AuthorController extends Controller
 {
     public function index() {
-        return response()->json(Author::all(), 200);
+        $authors = Author::all();
+
+         if ($authors->isEmpty()) {
+            return response()->json([
+                "success" => true,
+                "message" => "Resource data not found"
+
+            ], 200);
+        }
+
+       return response()->json([
+        "success" => true,
+        "message" => "Get all resources",
+        "data" => $authors
+       ], 200);
     }
 }
