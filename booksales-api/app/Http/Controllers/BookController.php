@@ -8,7 +8,6 @@ use App\Models\Book;
 class BookController extends Controller
 {
         public function index(){
-        $books = Book::with('author')->get();
-        return view('books', compact('books'));
+        return response()->json(Book::with('author')->get(), 200);
     }
 }
