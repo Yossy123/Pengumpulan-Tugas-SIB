@@ -1,4 +1,4 @@
-import API from "../_api";
+import { API } from "../_api";
 
 export const getAuthors = async () => {
   const { data } = await API.get("/authors");
@@ -13,4 +13,15 @@ export const createAuthor = async (data) => {
   console.log(error);
   throw error;
  }
+
+ 
 }
+export const deleteAuthor = async (id) => {
+  await API.delete(`/authors/${id}`);
+};
+
+export const showAuthor = id => API.get(`/authors/${id}`).then(res => res.data.data);
+export const updateAuthor = (id, data) => API.post(`/authors/${id}`, data, {
+  headers: { "Content-Type": "multipart/form-data" },
+});
+

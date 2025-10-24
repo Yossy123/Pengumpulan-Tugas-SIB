@@ -75,7 +75,7 @@ export default function AuthorCreate() {
           </div>
           <div>
             <label
-              htmlFor="photo"
+              htmlFor="coverphoto"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Photo
