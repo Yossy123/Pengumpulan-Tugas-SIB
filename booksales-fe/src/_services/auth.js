@@ -12,15 +12,15 @@ export const login = async ({email, password}) => {
     }
 }
 
-// export const register = async (data) => {
-//   try {
-//     const { data: response } = await API.post("/register", data);
-//     return response;
-//   } catch (error) {
-//     console.error(error);
-//     throw error;
-//   }
-// };
+export const register = async (data) => {
+  try {
+    const response = await API.post("/register", data);
+    return response.data;
+  } catch (error) {
+    console.error("Register error:", error);
+    throw error;
+  }
+};
 
 
 export const logout = async ({token}) => {
