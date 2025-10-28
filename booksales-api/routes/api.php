@@ -7,62 +7,39 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\TransactionController;
 
-// ==========================
-// 1. AUTHENTICATION ROUTES
-// ==========================
-//
-// Register, login, logout, user info
-
-Route::post('/register', [AuthController::class, 'register']); // Register akun baru
-Route::post('/login', [AuthController::class, 'login']);       // Login
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api'); // Logout (wajib login)
-
+// AUTH ROUTES
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:sanctum');
+})->middleware('auth:api');
 
-
-// ===========================================
-// 2. PUBLIC (GUEST/SEMUA ORANG BISA AKSES)
-// ===========================================
-
+// PUBLIC RESOURCE (INDEX, SHOW)
 Route::apiResource('authors', AuthorController::class)->only(['index', 'show']);
 Route::apiResource('genres', GenreController::class)->only(['index', 'show']);
 Route::apiResource('books', BookController::class)->only(['index', 'show']);
 
-
-// ========================
-// 3. AUTHENTICATED (USER LOGGED IN: ADMIN & CUSTOMER)
-// ========================
+// AUTH: USER (CUSTOMER/ADMIN)
 Route::middleware(['auth:api'])->group(function () {
-
-    // Transaksi list, tambah transaksi, detail transaksi
-    // Route::apiResource('transactions', TransactionController::class)->only(['index', 'store', 'show']);
     Route::post('transactions', [TransactionController::class, 'store']);
     Route::get('transactions/{id}', [TransactionController::class, 'show']);
+});
 
-    // (TAMBAHKAN JIKA PERLU: akses khusus author detail/data oleh user login)
-    // Route::apiResource('authors', AuthorController::class)->only(['index', 'show']);
+// AUTH: ADMIN ONLY
+Route::middleware(['auth:api', 'role:admin'])->group(function () {
+    // CRUD untuk admin
+    Route::apiResource('authors', AuthorController::class)->only(['store', 'update', 'destroy']);
+    Route::apiResource('books', BookController::class)->only(['store', 'update', 'destroy']);
+    Route::apiResource('genres', GenreController::class)->only(['store', 'update', 'destroy']);
 
-    // =============================
-    // 4. ADMIN-ONLY (hak akses role:admin)
-    // =============================
-    Route::middleware(['role:admin'])->group(function () {
+    // Transaksi index, update, destroy
+    Route::get('transactions', [TransactionController::class, 'index']);
+    Route::put('transactions/{id}', [TransactionController::class, 'update']);
+    Route::delete('transactions/{id}', [TransactionController::class, 'destroy']);
 
-        // CRUD penuh untuk Author, Book, Genre khusus admin
-        Route::apiResource('authors', AuthorController::class)->only(['store', 'update', 'destroy']);
-        Route::apiResource('books', BookController::class)->only(['store', 'update', 'destroy']);
-        Route::apiResource('genres', GenreController::class)->only(['store', 'update', 'destroy']);
-
-        // Khusus transaksi: admin saja yang bisa update & delete transaksi
-        // Route::apiResource('transactions', TransactionController::class)->only(['update', 'destroy']);
-        Route::get('transactions', [TransactionController::class, 'index']);
-        Route::put('transactions/{id}', [TransactionController::class, 'update']);
-        Route::delete('transactions/{id}', [TransactionController::class, 'destroy']);
-
-        // Jika ingin lebih spesifik update pakai POST pada ID (untuk FormData)
-        Route::post('authors/{id}', [AuthorController::class, 'update']);
-        Route::post('books/{id}', [BookController::class, 'update']);
-        Route::post('genres/{id}', [GenreController::class, 'update']);
-    });
+    // Jika perlu support multipart update
+    Route::post('authors/{id}', [AuthorController::class, 'update']);
+    Route::post('books/{id}', [BookController::class, 'update']);
+    Route::post('genres/{id}', [GenreController::class, 'update']);
 });
