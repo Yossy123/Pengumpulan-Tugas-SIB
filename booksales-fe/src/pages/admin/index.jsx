@@ -1,7 +1,7 @@
 export default function Dashboard() {
   return (
     <>
-      <h1>Admin Dashboard</h1>
+      <h1 className="text-gray-400">Admin Dashboard</h1>
     </>
   );
 }
